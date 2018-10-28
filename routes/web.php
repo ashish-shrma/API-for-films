@@ -15,6 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('/films/','FilmController');
+
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/films/create', function () {
+    return view('create');
+})->name('create');
+Route::post('/films/create', 'FilmController@store')->name('store');	
+
+
+

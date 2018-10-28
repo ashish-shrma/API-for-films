@@ -13,8 +13,18 @@
                             {{ session('status') }}
                         </div>
                     @endif
+            <div class="content">
+                <div class="title m-b-md">
+                    Welcome to Films Database
+                </div>
 
-                    You are logged in!
+                <div class="links">
+                <li><a href="films/create">Add New Film</a></li>
+                    <li><a href="/">All Films List</a></li>
+                    
+                </div>
+
+
                 </div>
             </div>
         </div>

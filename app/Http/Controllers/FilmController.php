@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Movie;
+use Illuminate\Support\Str;
+use Input as Input;
+
 
 class FilmController extends Controller
 {
@@ -13,7 +17,8 @@ class FilmController extends Controller
      */
     public function index()
     {
-        //
+        $movies= Movie::all();
+        return response()->json($movies);
     }
 
     /**
@@ -34,7 +39,28 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $filename = $request->photo->getClientOriginalName();
+
+        if($request->hasFile('photo')){
+            $request->photo->storeAs('public',$filename);
+        }
+
+
+
+            $Movie = Movie::create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name, '-'),
+            'description' => $request->desc,
+            'release_date' => $request->date,
+            'rating' => $request->rating,
+            'ticket_price' => $request->ticket_price,
+            'country' => $request->country,
+            'photo' => $request->file('photo')->getClientOriginalName()
+            ]);     
+
+        return $request->name;
+
+
     }
 
     /**
