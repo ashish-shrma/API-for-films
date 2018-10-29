@@ -24,10 +24,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/films/create', function () {
-    return view('create');
-})->name('create');
+Route::get('/films/create', 'FilmController@create')->name('create');
+
 Route::post('/films/create', 'FilmController@store')->name('store');	
+
+Route::get('/films/genre', 'GenreController@index')->name('genre');
+
+Route::post('/films/genre', 'GenreController@store')->name('storeGenre');
 
 
 

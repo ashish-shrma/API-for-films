@@ -1,17 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Genre;
+
 
 use Illuminate\Http\Request;
-use App\Movie;
-use App\Genre;
-use App\Genre_Movie;
 
-use Illuminate\Support\Str;
-use Input as Input;
-
-
-class FilmController extends Controller
+class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +15,9 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $movies= Movie::all();
-        return response()->json($movies);
+        $genres = Genre::all();
+
+        return view('genre',compact('genres'));
     }
 
     /**
@@ -31,9 +27,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-                $genres = Genre::all();
-
-        return view('create',compact('genres'));
+        //
     }
 
     /**
@@ -44,38 +38,12 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        $filename = $request->photo->getClientOriginalName();
-
-        if($request->hasFile('photo')){
-            $request->photo->storeAs('public',$filename);
-        }
- 
-
-
-
-            $Movie = Movie::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name, '-'),
-            'description' => $request->desc,
-            'release_date' => $request->date,
-            'rating' => $request->rating,
-            'ticket_price' => $request->ticket_price,
-            'country' => $request->country,
-            'photo' => $request->file('photo')->getClientOriginalName()
+        $genre = Genre::create([
+            'name' => $request->name
             ]);     
-      
 
-        foreach($request->genre as $g) {
-            Genre_Movie::create([
-                'movie_id' => $Movie->id,
-                'genre_id' => $g
-            ]);
-        }
-        return $request->name;
-
-
+        return $this->index();
     }
-   
 
     /**
      * Display the specified resource.

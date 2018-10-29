@@ -40,7 +40,13 @@
 						<input type="radio" name="rate" id="rate5" value="5"> 5 
 					</label>
 				</div>
+			<div class="form-group">
+				<label for="">Photo</label><br>
+				<input type="file" id="imageFile" name="photo">
 			</div>
+			</div>
+
+			
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
@@ -56,14 +62,17 @@
 				<label for="filmCountry">Country</label>
 				<input type="text" class="form-control" id="filmCountry" name="country" placeholder="Enter country" required>
 			</div>
-<!-- 			<div class="form-group">
-				<label for="filmGenre">Genre</label>
-				<input type="text" class="form-control" id="filmGenre" name="genre" placeholder="Enter genre" required>
-			</div> -->
 			<div class="form-group">
-				<label for="">Photo</label><br>
-				<input type="file" id="imageFile" name="photo">
-			</div>
+				<label for="filmGenre">Genre (multi-select)   </label><a href="/films/genre">    Add New Genre</a>
+                                    <select class="form-control" name="genre[]" multiple required>
+                                        @foreach($genres as $genre)
+                                            <option value="{{{$genre->id}}}">{{{$genre->name}}}</option>
+                                        @endforeach
+                                    </select>
+
+
+			</div> 
+
 		</div>
 	</div>
 	<div>
@@ -72,5 +81,6 @@
 	
 	</div>
 </form>
+
 </div>
 @endsection

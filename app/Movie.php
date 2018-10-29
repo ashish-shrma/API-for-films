@@ -18,5 +18,11 @@ class Movie extends Model
 	'photo',
 	];
 
+	public function genres()
+	{
+		
+		return $this->belongsToMany('App\Genre');	
+	}
+
 
 }
