@@ -21,8 +21,9 @@ class FilmController extends Controller
     public function index()
     {
         $movies= Movie::all();
-        return response()->json($movies);
+        return view('allfilms',compact('movies'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -71,7 +72,7 @@ class FilmController extends Controller
                 'genre_id' => $g
             ]);
         }
-        return $request->name;
+        return $this->create();
 
 
     }
@@ -83,9 +84,14 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $film = Movie::with('genres')->get()->where('slug', $slug)->first();
+
+        return view('film',compact('film'));
+
+        // return response()->json($film);
+
     }
 
     /**

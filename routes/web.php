@@ -15,7 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/films/','FilmController');
+Route::resource('api/films/','FilmController');
+
+Route::get('api/films/{slug}', 'FilmController@show')->name('film');
+
+
+
 
 
 
