@@ -9,6 +9,7 @@ class Comments extends Model
         protected $fillable = [
 	'film_id',
 	'user_id',
-	'message'
+	'message',
+	'name'
 	];
 }
