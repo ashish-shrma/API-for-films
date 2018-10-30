@@ -35,6 +35,8 @@ Route::post('/films/create', 'FilmController@store')->name('store');
 
 Route::get('/films/genre', 'GenreController@index')->name('genre');
 
+Route::post('/films/{id}', 'FilmController@addComment')->name('films');
+
 Route::post('/films/genre', 'GenreController@store')->name('storeGenre');
 
 

@@ -34,6 +34,48 @@
                     </div>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Comments</h3>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @if (Auth::guest())
+                                <div class="text-center"><a href="{{ route('login') }}">Login</a> or <a href="{{ route('register') }}">Register</a> to add Comments...</div>
+                            @else
+                                <form action="/films/{{{$film->id}}}" method="post">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="text" name="name" placeholder="your name..." class="col-lg-12" required>
+                                    <br>
+                                    <br>
+                                    <textarea name="message" class="col-lg-12" required></textarea>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="text-right"><input type="submit" value="Add Comment"></div>
+                                </form>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @foreach($comments as $comment)
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text-left"><b>{{{$comment->name}}}</b></div>
+                            <div class="text-justify">{{{$comment->comment}}}</div>
+                        </div>
+                    </div>
+                        <hr>
+                    @endforeach
+
+                </div>
+            </div>
+
+
 
         </div>
     </div>

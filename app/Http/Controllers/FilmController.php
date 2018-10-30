@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Movie;
+use App\Comments;
 use App\Genre;
 use App\Genre_Movie;
 
@@ -88,11 +89,27 @@ class FilmController extends Controller
     {
         $film = Movie::with('genres')->get()->where('slug', $slug)->first();
 
-        return view('film',compact('film'));
+        $comments = Comments::where('user_id',\Auth::user()->id);
+
+        return view('film',compact('film','comments'));
 
         // return response()->json($film);
 
     }
+
+        public function addComment($id, Request $request)
+    {
+
+            $Movie = Comments::create([
+            'film_id' => $id,
+            'user_id' => \Auth::user()->id,
+            'message' => $request->message,
+            'name'=>$request->name
+            ]);     
+      
+            return redirect('api/films/'.Movie::find($id)->slug);     
+}
+
 
     /**
      * Show the form for editing the specified resource.

@@ -20,7 +20,7 @@
 
                 <div class="links">
                 <li><a href="films/create">Add New Film</a></li>
-                    <li><a href="/">All Films List</a></li>
+                    <li><a href="api/films">All Films List</a></li>
                     
                 </div>
 
